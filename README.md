@@ -14,9 +14,9 @@ public struct TextStyle<T: UILabel> {
         }
     }
     public private(set) var textStyle: UIFont.TextStyle
-    public private(set) var textColor: UIColor
+    public private(set) var textColor: UIColor?
 
-    public init(wrappedValue: T, _ textStyle: UIFont.TextStyle, textColor: UIColor = .text) {
+    public init(wrappedValue: T, _ textStyle: UIFont.TextStyle, textColor: UIColor? = nil) {
         self.wrappedValue = wrappedValue
         self.textStyle = textStyle
         self.textColor = textColor
@@ -28,10 +28,11 @@ public struct TextStyle<T: UILabel> {
         wrappedValue.translatesAutoresizingMaskIntoConstraints = false
         wrappedValue.adjustsFontForContentSizeCategory = true
         wrappedValue.numberOfLines = 0
-        wrappedValue.textColor = textColor
+        if let value = textColor {
+            wrappedValue.textColor = value
+        }
     }
 }
-
 ```
 
 # Usage
